@@ -5,7 +5,7 @@ import { router } from "../router";
 export function RouterProvider() {
   return (
     <QueryProvider>
-      <ReactRouterProvider router={router} />;
+      <ReactRouterProvider router={router} />
     </QueryProvider>
   );
 }

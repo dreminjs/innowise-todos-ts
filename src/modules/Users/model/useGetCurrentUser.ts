@@ -1,6 +1,5 @@
-import { useQueryClient } from "@tanstack/react-query";
-import { USER_QUERY_KEYS } from "./user.constants";
 import type { IUser } from "./user.interface";
+import { useGetMe } from "../api/queries";
 export function useGetCurrentUser(): IUser | undefined;
 export function useGetCurrentUser<K extends keyof IUser>(
   key: K,
@@ -8,10 +7,8 @@ export function useGetCurrentUser<K extends keyof IUser>(
 export function useGetCurrentUser<K extends keyof IUser>(
   key?: K,
 ): IUser | IUser[K] | undefined {
-  const queryClient = useQueryClient();
-  const cachedData = queryClient.getQueryData<IUser>(USER_QUERY_KEYS.GET_ME);
-  console.log(cachedData);
-  if (!cachedData) return undefined;
+  const { data } = useGetMe();
+  if (!data) return undefined;
 
-  return key ? cachedData[key] : cachedData;
+  return key ? data[key] : data;
 }
