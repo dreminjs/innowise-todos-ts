@@ -9,7 +9,7 @@ export const UserActions = () => {
   if (isLoading) return <p>Loading...</p>;
 
   return (
-    <div className="bg-linear-to-tl from-[#EDD098] via-[#F1804F] to-[#EEC595] rounded-[10px] flex items-center">
+    <div className="hidden md:flex bg-linear-to-tl from-[#EDD098] via-[#F1804F] to-[#EEC595] rounded-[10px] items-center">
       {data ? (
         <>
           <UserProfile />

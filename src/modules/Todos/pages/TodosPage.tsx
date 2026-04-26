@@ -1,9 +1,9 @@
-import { TodosTable } from "../ui/TodosTable";
+import { TodosTable } from "../ui/TodoTable/TodosTable";
 
 const TodosPage = () => {
   return (
     <>
-      <h2 className="font-semibald text-[30px] leading-11.25 mb-8">Todos</h2>
+      <h2 className="page-title">Todos</h2>
       <TodosTable />
     </>
   );

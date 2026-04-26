@@ -1,6 +1,7 @@
 import type { FC } from "react";
 import { Check, CircleX, Pencil, Redo2 } from "lucide-react";
-import { useChangeTodoCompleteStatus } from "../api/queries";
+import { useChangeTodoCompleteStatus } from "../../api/queries";
+import { Link } from "@tanstack/react-router";
 
 interface ITodosActionsProps {
   todoId: number;
@@ -15,20 +16,17 @@ export const TodosActions: FC<ITodosActionsProps> = ({
   const { mutate } = useChangeTodoCompleteStatus(todoId, completed);
 
   return (
-    <div className="flex gap-[12px]">
+    <div className="flex gap-3">
       <button
         onClick={() => onSetTodoToDelete(todoId)}
-        className="p-1.5 bg-linear-to-tl from-[#EDD098] via-[#F1804F] to-[#EEC595] rounded-[5px]"
+        className="todo-action-button"
       >
         <CircleX color="white" />
       </button>
-      <button className="p-1.5 bg-linear-to-tl from-[#EDD098] via-[#F1804F] to-[#EEC595] rounded-[5px]">
+      <Link to={`/todos/${todoId}/edit`} className="todo-action-button">
         <Pencil color="white" />
-      </button>
-      <button
-        onClick={() => mutate()}
-        className="p-1.5 bg-linear-to-tl from-[#EDD098] via-[#F1804F] to-[#EEC595] rounded-[5px]"
-      >
+      </Link>
+      <button onClick={() => mutate()} className="todo-action-button">
         {completed ? <Redo2 color="white" /> : <Check color="white" />}
       </button>
     </div>

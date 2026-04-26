@@ -1,3 +1,6 @@
+import type z from "zod";
+import type { todosSchema } from "../todos.schema";
+
 export interface ITodo {
   id: number;
   todo: string;
@@ -11,3 +14,9 @@ export interface ITodosResponse {
   skip: number;
   limit: number;
 }
+
+export type TTodoFormSchema = z.infer<typeof todosSchema>;
+
+export type CreateTodoDto = TTodoFormSchema & {
+  userId?: number;
+};

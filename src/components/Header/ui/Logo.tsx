@@ -3,7 +3,7 @@ import LogoIcon from "@/assets/logo.svg";
 
 export const Logo = () => {
   return (
-    <Link to="/">
+    <Link className="shrink-0" to="/">
       <img src={LogoIcon} alt="Logo" />
     </Link>
   );

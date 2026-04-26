@@ -1,8 +1,8 @@
 import { TableBody } from "@/components/ui/table";
-import type { ITodo } from "../model/interfaces/todo.interface";
+import type { ITodo } from "../../model/interfaces/todo.interface";
 import { TodosRow } from "./TodosRow";
-import { useDeleteTodoModal } from "../model/hooks/useDeleteTodoModal";
-import { DeleteTodoModal } from "./DeleteTodoModal/DeleteTodoModal";
+import { useDeleteTodoModal } from "../../model/hooks/useDeleteTodoModal";
+import { DeleteTodoModal } from "../DeleteTodoModal";
 import type { FC } from "react";
 
 interface ITodosBodyProps {

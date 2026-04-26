@@ -1,12 +1,16 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import {
   changeTodoCompleteStatus,
+  createTodo,
   deleteTodo,
+  findOneTodo,
   findUserTodos,
+  updateTodo,
 } from "./services";
 import { TODOS_QUERY_KEYS } from "../model/todos.constants";
 import { useGetCurrentUser } from "@/modules/Users";
 import { useNotificationsSlice } from "@/modules/Notifications/model/notification.slice";
+import type { TTodoFormSchema } from "../model/interfaces/todo.interface";
 
 export const useGetMyTodos = () => {
   const userId = useGetCurrentUser("id");
@@ -14,6 +18,50 @@ export const useGetMyTodos = () => {
   return useQuery({
     queryKey: TODOS_QUERY_KEYS.todos(userId),
     queryFn: () => findUserTodos(userId),
+  });
+};
+
+export const useUpdateTodo = (todoId: number) => {
+  const addNotification = useNotificationsSlice(
+    (state) => state.addNotification,
+  );
+  return useMutation({
+    mutationFn: (dto: TTodoFormSchema) => updateTodo(todoId, dto),
+    onSuccess: () => {
+      addNotification({
+        type: "success",
+        message: "Todo updated successfully",
+      });
+    },
+    onError: () => {
+      addNotification({
+        type: "error",
+        message: "Failed to update todo",
+      });
+    },
+  });
+};
+
+export const usePostTodo = () => {
+  const addNotification = useNotificationsSlice(
+    (state) => state.addNotification,
+  );
+  const userId = useGetCurrentUser("id");
+
+  return useMutation({
+    mutationFn: (dto: TTodoFormSchema) => createTodo({ ...dto, userId }),
+    onSuccess: () => {
+      addNotification({
+        type: "success",
+        message: "Todo created successfully",
+      });
+    },
+    onError: () => {
+      addNotification({
+        type: "error",
+        message: "Failed to create todo",
+      });
+    },
   });
 };
 
@@ -70,5 +118,12 @@ export const useChangeTodoCompleteStatus = (
         message: error.message,
       });
     },
+  });
+};
+
+export const useGetTodo = (todoId: number) => {
+  return useQuery({
+    queryKey: TODOS_QUERY_KEYS.todos(todoId),
+    queryFn: () => findOneTodo(todoId),
   });
 };

@@ -5,7 +5,7 @@ import { UserActions } from "./user-actions/UserActions";
 export const Header = () => {
   return (
     <header className="border-b border-[#C0C0C0]">
-      <div className="container">
+      <div className="my-container">
         <Logo />
         <Navigation />
         <UserActions />

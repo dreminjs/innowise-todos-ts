@@ -1,5 +1,5 @@
 import { TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { todosHeaderData } from "../model/todos.data";
+import { todosHeaderData } from "../../model/todos.data";
 import clsx from "clsx";
 
 export const TodosTableHeader = () => {

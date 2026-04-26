@@ -1,5 +1,5 @@
 import { TableCell, TableRow } from "@/components/ui/table";
-import type { ITodo } from "../model/interfaces/todo.interface";
+import type { ITodo } from "../../model/interfaces/todo.interface";
 import type { FC } from "react";
 import { TodosActions } from "./TodosActions";
 
