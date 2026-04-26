@@ -9,6 +9,7 @@ import {
 import { findMe } from "@/modules/Users/api/service";
 import { createRootRoutWithDI } from "./router.setup";
 import { lazy } from "react";
+import { LoadingMessage } from "@/components/LoadingMessage";
 
 export const TodosPage = lazy(() => import("@/modules/Todos/pages/TodosPage"));
 export const EditTodoPage = lazy(
@@ -29,15 +30,14 @@ const protectedRoute = createRoute({
   beforeLoad: async ({ context }) => {
     const { getMe } = context;
     try {
-      const me = await getMe();
-      if (!me?.id) throw redirect({ to: "/login" });
+      await getMe();
     } catch (e) {
       if (isRedirect(e)) throw e;
       throw redirect({ to: "/login" });
     }
   },
   component: Outlet,
-  pendingComponent: () => <h3>Application is Loading...</h3>,
+  pendingComponent: LoadingMessage,
 });
 
 const publicRoute = createRoute({
@@ -47,15 +47,14 @@ const publicRoute = createRoute({
     const { getMe } = context;
     try {
       const me = await getMe();
-      console.log(me);
       if (me?.id) throw redirect({ to: "/" });
     } catch (e) {
+      // console.log(e, "FROM publicRoute");
       if (isRedirect(e)) throw e;
-      throw redirect({ to: "/" });
     }
   },
   component: Outlet,
-  pendingComponent: () => <h3>Application is Loading...</h3>,
+  pendingComponent: LoadingMessage,
 });
 
 const indexRoute = createRoute({

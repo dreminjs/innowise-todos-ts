@@ -15,11 +15,7 @@ export const TodosBody: FC<ITodosBodyProps> = ({ todos }) => {
     <>
       <TableBody>
         {todos.map((el) => (
-          <TodosRow
-            onSetTodoToDelete={onSetTodoToDelete}
-            key={crypto.randomUUID()}
-            {...el}
-          />
+          <TodosRow onSetTodoToDelete={onSetTodoToDelete} key={el.id} {...el} />
         ))}
       </TableBody>
       <DeleteTodoModal onCancel={onCancelDelete} todoId={todoId} />

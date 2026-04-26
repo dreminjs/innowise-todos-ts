@@ -4,9 +4,14 @@ import { tokenService } from "../model/tokenService";
 export const instance = axios.create({
   baseURL: "https://dummyjson.com/",
   withCredentials: true,
-  headers: {
-    Authorization: `Bearer ${tokenService.getToken()}`,
-  },
+});
+
+instance.interceptors.request.use((config) => {
+  const token = tokenService.getToken();
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
 });
 
 // let retryCount = 0;

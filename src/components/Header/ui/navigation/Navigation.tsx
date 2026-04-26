@@ -12,7 +12,7 @@ interface INavigationProps {
 export const Navigation: FC<INavigationProps> = ({ onOpen, className }) => {
   return (
     <nav>
-      <ul className={clsx("gap-3.", className)}>
+      <ul className={clsx("gap-3", className)}>
         {navigationItems.map((item, idx) => (
           <NavigationItem key={idx} to={item.to} label={item.label} />
         ))}
