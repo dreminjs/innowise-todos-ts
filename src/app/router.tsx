@@ -8,10 +8,16 @@ import {
 } from "@tanstack/react-router";
 import { findMe } from "@/modules/Users/api/service";
 import { createRootRoutWithDI } from "./router.setup";
-import CreateTodoPage from "@/modules/Todos/pages/CreateTodoPage";
-import EditTodoPage from "@/modules/Todos/pages/EditTodoPage";
-import LoginPage from "@/modules/Login/pages/LoginPage";
-import TodosPage from "@/modules/Todos/pages/TodosPage";
+import { lazy } from "react";
+
+export const TodosPage = lazy(() => import("@/modules/Todos/pages/TodosPage"));
+export const EditTodoPage = lazy(
+  () => import("@/modules/Todos/pages/EditTodoPage"),
+);
+export const CreateTodoPage = lazy(
+  () => import("@/modules/Todos/pages/CreateTodoPage"),
+);
+export const LoginPage = lazy(() => import("@/modules/Login/pages/LoginPage"));
 
 const rootRoute = createRootRoutWithDI({
   component: BaseLayout,

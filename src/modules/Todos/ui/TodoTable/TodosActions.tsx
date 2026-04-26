@@ -23,7 +23,11 @@ export const TodosActions: FC<ITodosActionsProps> = ({
       >
         <CircleX color="white" />
       </button>
-      <Link to={`/todos/${todoId}/edit`} className="todo-action-button">
+      <Link
+        to="/todos/$todoId/edit"
+        params={{ todoId: String(todoId) }}
+        className="todo-action-button"
+      >
         <Pencil color="white" />
       </Link>
       <button onClick={() => mutate()} className="todo-action-button">

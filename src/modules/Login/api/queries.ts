@@ -1,8 +1,7 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { login } from "./services";
 import { useNotificationsSlice } from "@/modules/Notifications/model/notification.slice";
 import { useNavigate } from "@tanstack/react-router";
-import { USER_QUERY_KEYS } from "@/modules/Users";
 import { useTokenSlice } from "@/modules/Tokens";
 
 export const useLogin = () => {
