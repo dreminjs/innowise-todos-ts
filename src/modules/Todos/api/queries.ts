@@ -9,7 +9,6 @@ export const useGetMyTodos = () => {
   return useQuery({
     queryKey: TODOS_QUERY_KEYS.todos(userId),
     queryFn: () => findUserTodos(userId),
-    select: (data) => data.data.todos,
     enabled: !!userId,
   });
 };

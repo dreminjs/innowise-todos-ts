@@ -6,7 +6,9 @@ export const BaseLayout = () => {
   return (
     <>
       <Header />
-      <Outlet />
+      <main className="mx-auto max-w-315 pt-8 px-2">
+        <Outlet />
+      </main>
       <NotificationList />
     </>
   );

@@ -10,7 +10,7 @@ export function useGetCurrentUser<K extends keyof IUser>(
 ): IUser | IUser[K] | undefined {
   const queryClient = useQueryClient();
   const cachedData = queryClient.getQueryData<IUser>(USER_QUERY_KEYS.GET_ME);
-
+  console.log(cachedData);
   if (!cachedData) return undefined;
 
   return key ? cachedData[key] : cachedData;

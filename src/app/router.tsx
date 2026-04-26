@@ -1,7 +1,6 @@
 import { BaseLayout } from "@/components/Layout/BaseLayout";
 import LoginPage from "@/modules/Login/pages/LoginPage";
 import TodosPage from "@/modules/Todos/pages/TodosPage";
-
 import {
   createRoute,
   createRouter,
@@ -9,7 +8,6 @@ import {
   Outlet,
   redirect,
 } from "@tanstack/react-router";
-import { PublicRoutes } from "./Providers/PublicRoutes";
 import { findMe } from "@/modules/Users/api/service";
 import { createRootRoutWithDI } from "./router.setup";
 
@@ -21,14 +19,14 @@ const protectedRoute = createRoute({
   getParentRoute: () => rootRoute,
   id: "protected",
   beforeLoad: async ({ context }) => {
-    const { getMe } = context;
-    try {
-      const me = await getMe();
-      if (!me) throw redirect({ to: "/login" });
-    } catch (e) {
-      if (isRedirect(e)) throw e;
-      throw redirect({ to: "/login" });
-    }
+    // const { getMe } = context;
+    // try {
+    //   const me = await getMe();
+    //   if (me?.id) throw redirect({ to: "/login" });
+    // } catch (e) {
+    //   if (isRedirect(e)) throw e;
+    //   throw redirect({ to: "/login" });
+    // }
   },
   component: Outlet,
   pendingComponent: () => <h3>Application is Loading...</h3>,
@@ -38,16 +36,17 @@ const publicRoute = createRoute({
   getParentRoute: () => rootRoute,
   id: "public",
   beforeLoad: async ({ context }) => {
-    const { getMe } = context;
-    try {
-      const me = await getMe();
-      if (me) throw redirect({ to: "/" });
-    } catch (e) {
-      if (isRedirect(e)) throw e;
-      throw redirect({ to: "/" });
-    }
+    // const { getMe } = context;
+    // try {
+    //   const me = await getMe();
+    //   console.log(me);
+    //   if (me?.id) throw redirect({ to: "/" });
+    // } catch (e) {
+    //   if (isRedirect(e)) throw e;
+    //   throw redirect({ to: "/" });
+    // }
   },
-  component: PublicRoutes,
+  component: Outlet,
   pendingComponent: () => <h3>Application is Loading...</h3>,
 });
 
@@ -58,7 +57,7 @@ const indexRoute = createRoute({
 });
 
 const loginRoute = createRoute({
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => publicRoute,
   path: "/login",
   component: LoginPage,
 });

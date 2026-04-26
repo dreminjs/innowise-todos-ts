@@ -4,9 +4,9 @@ import { Link } from "@tanstack/react-router";
 import { UserProfile } from "./UserProfile";
 
 export const UserActions = () => {
-  const { data, isPending } = useGetMe();
+  const { data, isLoading } = useGetMe();
 
-  if (isPending) return <p>Loading...</p>;
+  if (isLoading) return <p>Loading...</p>;
 
   return (
     <div className="bg-linear-to-tl from-[#EDD098] via-[#F1804F] to-[#EEC595] rounded-[10px] flex items-center">
