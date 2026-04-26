@@ -5,8 +5,8 @@ export const Navigation = () => {
   return (
     <nav>
       <ul className="gap-3.5 flex">
-        {navigationItems.map((item) => (
-          <NavigationItem key={item.to} to={item.to} label={item.label} />
+        {navigationItems.map((item, idx) => (
+          <NavigationItem key={idx} to={item.to} label={item.label} />
         ))}
       </ul>
     </nav>

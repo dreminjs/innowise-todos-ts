@@ -5,3 +5,18 @@
     --font-poppins: "Poppins", sans-serif;
     --font-montserrat: "Montserrat", sans-serif;
 }
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.animate-\[slideIn_0\.2s_ease\] {
+    animation: slideIn 0.2s ease;
+}
