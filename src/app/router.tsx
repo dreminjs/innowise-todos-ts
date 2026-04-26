@@ -31,6 +31,7 @@ const protectedRoute = createRoute({
     }
   },
   component: Outlet,
+  pendingComponent: () => <h3>Application is Loading...</h3>,
 });
 
 const publicRoute = createRoute({
@@ -47,6 +48,7 @@ const publicRoute = createRoute({
     }
   },
   component: PublicRoutes,
+  pendingComponent: () => <h3>Application is Loading...</h3>,
 });
 
 const indexRoute = createRoute({
