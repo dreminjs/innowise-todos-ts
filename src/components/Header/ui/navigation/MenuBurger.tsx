@@ -1,8 +1,13 @@
 import { Menu } from "lucide-react";
+import type { FC } from "react";
 
-export const MenuBurger = () => {
+interface IMenuBurgerProps {
+  onOpen: () => void;
+}
+
+export const MenuBurger: FC<IMenuBurgerProps> = ({ onOpen }) => {
   return (
-    <button className="md:hidden">
+    <button onClick={onOpen} className="md:hidden">
       <Menu />
     </button>
   );
