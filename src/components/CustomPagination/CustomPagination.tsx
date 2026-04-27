@@ -1,4 +1,3 @@
-import { usePagination } from "@/shared";
 import {
   Pagination,
   PaginationContent,
