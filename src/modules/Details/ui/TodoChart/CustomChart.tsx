@@ -5,7 +5,6 @@ import {
   type ChartConfig,
 } from "@/components/ui/chart";
 import { CartesianGrid, Line, LineChart, XAxis } from "recharts";
-import type { IChartData } from "../../model/details.interface";
 import type { FC } from "react";
 
 type TCustomChartProps = {
