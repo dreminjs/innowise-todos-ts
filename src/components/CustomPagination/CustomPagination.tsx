@@ -34,7 +34,7 @@ export const CustomPagination = ({
   skip,
   limit,
 }: CustomPaginationProps) => {
-  const currentPage = Math.floor(skip / limit) + 1;
+  const currentPage = skip === 0 ? 1 : Math.floor(skip / limit) + 1;
   const totalPages = Math.ceil(total / limit);
 
   if (totalPages <= 1) return null;
