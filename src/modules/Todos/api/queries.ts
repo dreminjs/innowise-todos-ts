@@ -11,13 +11,14 @@ import { TODOS_QUERY_KEYS } from "../model/todos.constants";
 import { useGetCurrentUser } from "@/modules/Users";
 import { useNotificationsSlice } from "@/modules/Notifications/model/notification.slice";
 import type { TTodoFormSchema } from "../model/interfaces/todo.interface";
+import type { IPaginationDto } from "@/shared";
 
-export const useGetMyTodos = () => {
+export const useGetMyTodos = (dto: IPaginationDto) => {
   const userId = useGetCurrentUser("id");
 
   return useQuery({
     queryKey: TODOS_QUERY_KEYS.todos(userId),
-    queryFn: () => findUserTodos(userId),
+    queryFn: () => findUserTodos(dto, userId),
   });
 };
 

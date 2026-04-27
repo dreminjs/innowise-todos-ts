@@ -4,9 +4,14 @@ import type {
   ITodo,
   ITodosResponse,
 } from "../model/interfaces/todo.interface";
+import type { IPaginationDto } from "@/shared";
 
-export const findUserTodos = async (userId?: number) => {
-  return (await instance.get<ITodosResponse>(`todos/user/${userId}`)).data;
+export const findUserTodos = async (dto: IPaginationDto, userId?: number) => {
+  return (
+    await instance.get<ITodosResponse>(
+      `todos/user/${userId}?skip=${dto.skip}&limit=${dto.limit}`,
+    )
+  ).data;
 };
 
 export const deleteTodo = async (todoId: number | null) => {
