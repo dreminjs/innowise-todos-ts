@@ -20,3 +20,8 @@ export type TTodoFormSchema = z.infer<typeof todosSchema>;
 export type CreateTodoDto = TTodoFormSchema & {
   userId?: number;
 };
+
+export interface ICompletedTodo {
+  todo: string;
+  completionDate: Date;
+}

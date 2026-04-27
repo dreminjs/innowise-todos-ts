@@ -152,7 +152,7 @@
 
 @layer components {
     .my-container {
-        @apply w-full max-w-400 mx-auto flex justify-between items-center px-4 py-3 border-[red];
+        @apply w-full max-w-7xl mx-auto flex justify-between items-center px-4 py-3 border-[red];
     }
 
     .todo-action-button {
@@ -160,6 +160,6 @@
     }
 
     .page-title {
-        @apply text-[30px] leading-11.25 mb-8;
+        @apply text-[30px] leading-11.25 mb-8 font-semibold;
     }
 }

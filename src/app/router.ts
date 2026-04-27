@@ -20,6 +20,8 @@ export const CreateTodoPage = lazy(
 );
 export const LoginPage = lazy(() => import("@/modules/Login/pages/LoginPage"));
 
+const DetailsPage = lazy(() => import("@/modules/Details/pages/DetailsPage"));
+
 const rootRoute = createRootRoutWithDI({
   component: BaseLayout,
 });
@@ -49,7 +51,6 @@ const publicRoute = createRoute({
       const me = await getMe();
       if (me?.id) throw redirect({ to: "/" });
     } catch (e) {
-      // console.log(e, "FROM publicRoute");
       if (isRedirect(e)) throw e;
     }
   },
@@ -81,10 +82,17 @@ export const editTodoRoute = createRoute({
   component: EditTodoPage,
 });
 
+const detailsRoute = createRoute({
+  getParentRoute: () => protectedRoute,
+  path: "/details",
+  component: DetailsPage,
+});
+
 const protectedRoutesTree = protectedRoute.addChildren([
   indexRoute,
   createTodoRoute,
   editTodoRoute,
+  detailsRoute,
 ]);
 
 const publicRoutesTree = publicRoute.addChildren([loginRoute]);

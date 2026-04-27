@@ -2,14 +2,25 @@ import { useGetMe } from "@/modules/Users";
 import { LogoutButton } from "./LogoutButton";
 import { Link } from "@tanstack/react-router";
 import { UserProfile } from "./UserProfile";
+import type { FC } from "react";
+import clsx from "clsx";
 
-export const UserActions = () => {
+interface IUserActionsProps {
+  className: string;
+}
+
+export const UserActions: FC<IUserActionsProps> = ({ className }) => {
   const { data, isLoading } = useGetMe();
 
   if (isLoading) return <p>Loading...</p>;
 
   return (
-    <div className="hidden md:flex bg-linear-to-tl from-[#EDD098] via-[#F1804F] to-[#EEC595] rounded-[10px] items-center">
+    <div
+      className={clsx(
+        "bg-linear-to-tl from-[#EDD098] via-[#F1804F] to-[#EEC595] rounded-[10px] items-center",
+        className,
+      )}
+    >
       {data ? (
         <>
           <UserProfile />

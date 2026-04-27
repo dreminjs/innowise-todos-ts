@@ -7,7 +7,7 @@ export const BaseLayout = () => {
   return (
     <div className="min-h-screen flex flex-col ">
       <Header />
-      <main className="w-full mx-auto max-w-[1260px] pt-8 px-2 flex-1 ">
+      <main className="w-full mx-auto max-w-325 pt-8 px-2 flex-1 ">
         <Outlet />
       </main>
       <Footer />

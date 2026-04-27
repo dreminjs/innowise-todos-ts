@@ -17,7 +17,7 @@ export const Header = () => {
           className="hidden md:flex"
           onOpen={handleToggleMobileMenu}
         />
-        <UserActions />
+        <UserActions className={"hidden md:flex"} />
         <MobileMenu
           isOpen={isMobileMenuOpen}
           onClose={handleToggleMobileMenu}
