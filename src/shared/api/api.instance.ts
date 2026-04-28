@@ -13,26 +13,38 @@ instance.interceptors.request.use((config) => {
   }
   return config;
 });
+let isRefreshFailed = false;
 
-// let retryCount = 0;
+instance.interceptors.response.use(
+  (response) => {
+    isRefreshFailed = false;
+    return response;
+  },
+  async (error) => {
+    const originalRequest = error.config;
 
-// instance.interceptors.response.use(
-//   (config) => config,
-//   async (error) => {
-//     const originalRequest = error.config;
-//     if (
-//       error.response.status === 401 ||
-//       (retryCount < 2 && error.config && !error.config._isRetry)
-//     ) {
-//       originalRequest._isRetry = true;
-//       retryCount += 1;
-//       try {
-//         return instance.get("auth/refresh");
-//       } catch {
-//         console.log(error);
-//       }
-//     }
-
-//     throw error;
-//   },
-// );
+    if (
+      error.response?.status === 401 &&
+      !originalRequest._retry &&
+      !originalRequest.url.includes("auth/refresh") &&
+      !isRefreshFailed
+    ) {
+      originalRequest._retry = true;
+      try {
+        const response = await instance.get("auth/refresh", {
+          withCredentials: true,
+        });
+        const newToken = response.data.token;
+        tokenService.saveToken(newToken);
+        originalRequest.headers.Authorization = `Bearer ${newToken}`;
+        return instance(originalRequest);
+      } catch (refreshError) {
+        isRefreshFailed = true;
+        tokenService.removeToken();
+        window.location.href = "/login";
+        return Promise.reject(refreshError);
+      }
+    }
+    return Promise.reject(error);
+  },
+);
