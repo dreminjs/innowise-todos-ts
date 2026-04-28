@@ -1,5 +1,6 @@
 import axios from "axios";
 import { tokenService } from "../model/tokenService";
+import { useTokenSlice } from "@/modules/Tokens";
 
 export const instance = axios.create({
   baseURL: "https://dummyjson.com/",
@@ -37,11 +38,12 @@ instance.interceptors.response.use(
         const newToken = response.data.token;
         tokenService.saveToken(newToken);
         originalRequest.headers.Authorization = `Bearer ${newToken}`;
+
         return instance(originalRequest);
       } catch (refreshError) {
         isRefreshFailed = true;
         tokenService.removeToken();
-        window.location.href = "/login";
+        useTokenSlice((state) => state).removeToken();
         return Promise.reject(refreshError);
       }
     }
